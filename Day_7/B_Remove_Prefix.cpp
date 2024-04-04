@@ -2,32 +2,28 @@
 
 using namespace std;
 
-int minmoves(int n, vector<int> s) {
-    unordered_set<int> seen;
-    int moves = 0; 
-    for (int i = 0; i < n; ++i) {
-        if (seen.find(s[i]) != seen.end()) {
-            break;
-        }
-        seen.insert(s[i]);
-        moves++;
-    }
-    return n - moves;
-}
-
+#define forn(i, n) for (int i = 0; i < int(n); i++)
 
 int main() {
     int t;
-    cin >> t; 
-    while (t--) {
+    cin >> t;
+    forn(tt, t) {
         int n;
-        cin >> n; 
-        vector<int> s(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> s[i]; 
+        cin >> n;
+        vector<int> a(n);
+        forn(i, n)
+            cin >> a[i];
+        bool yes = false;
+        set<int> c;
+        for (int i = n - 1; i >= 0; i--) {
+            if (c.count(a[i])) {
+                cout << i + 1 << endl;
+                yes = true;
+                break;
+            }
+            c.insert(a[i]);
         }
-        int result = minmoves(n, s);
-        cout << result << endl;
+        if (!yes)
+            cout << 0 << endl;
     }
-    return 0;
 }
